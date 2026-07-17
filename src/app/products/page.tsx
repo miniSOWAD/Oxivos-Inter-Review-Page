@@ -7,20 +7,16 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function ProductsPage() {
   const [activeCategory, setActiveCategory] = useState("All");
-
-  // Extract unique categories for the filter
   const categories = ["All", ...Array.from(new Set(products.map((p) => p.category)))];
-
-  // Filter products based on selected category
   const filteredProducts = activeCategory === "All" 
     ? products 
     : products.filter((p) => p.category === activeCategory);
 
   return (
     <div className="max-w-7xl mx-auto px-8 pt-24 min-h-screen">
-      <h1 className="text-4xl font-bold mb-8">All Products</h1>
+      <h1 className="text-4xl font-bold mb-8 text-white">All Products</h1>
       
-      {/* Category Filter */}
+      {/* Category Filter - Dark Theme */}
       <div className="flex gap-4 mb-10 overflow-x-auto pb-4">
         {categories.map((category) => (
           <button
@@ -28,8 +24,8 @@ export default function ProductsPage() {
             onClick={() => setActiveCategory(category)}
             className={`px-6 py-2 rounded-full whitespace-nowrap transition ${
               activeCategory === category 
-                ? "bg-black text-white" 
-                : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
+                ? "bg-white text-black" 
+                : "bg-neutral-800 text-neutral-300 hover:bg-neutral-700"
             }`}
           >
             {category}
@@ -37,7 +33,7 @@ export default function ProductsPage() {
         ))}
       </div>
 
-      {/* Responsive Product Grid */}
+      {/* Product Grid */}
       <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         <AnimatePresence>
           {filteredProducts.map((product) => (
@@ -51,7 +47,7 @@ export default function ProductsPage() {
               className="group"
             >
               <Link href={`/products/${product.id}`}>
-                <div className="relative h-80 mb-4 overflow-hidden rounded-xl bg-neutral-100">
+                <div className="relative h-80 mb-4 overflow-hidden rounded-xl bg-neutral-800">
                   <Image 
                     src={product.image} 
                     alt={product.name} 
@@ -59,11 +55,11 @@ export default function ProductsPage() {
                     className="object-cover group-hover:scale-105 transition duration-500" 
                   />
                   {!product.inStock && (
-                    <div className="absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded">Out of Stock</div>
+                    <div className="absolute top-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded">Out of Stock</div>
                   )}
                 </div>
-                <h3 className="font-semibold text-lg">{product.name}</h3>
-                <p className="text-neutral-500">৳{product.price}</p>
+                <h3 className="font-semibold text-lg text-white">{product.name}</h3>
+                <p className="text-neutral-400">৳{product.price}</p>
               </Link>
             </motion.div>
           ))}
