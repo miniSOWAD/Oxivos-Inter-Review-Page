@@ -1,1 +1,6 @@
 node_modules
+.next/dev/cache/turbopack/v16.2.10/00000001.sst
+.next/dev/trace
+.next/
+.next/dev/logs/next-development.log
+.next/dev/cache/turbopack/v16.2.10/CURRENT
